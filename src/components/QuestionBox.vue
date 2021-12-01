@@ -13,7 +13,7 @@
 
       <b-list-group>
         <b-list-group-item
-          v-for="(answer, index) in answers"
+          v-for="(answer, index) in shuffledAnswers"
           :key="index"
           @click="selectAnswer(index)"
           :class="answerClass(index)"
@@ -40,11 +40,6 @@ import _ from "lodash";
 
 export default {
   props: ["currentQuestion", "next", "increment"],
-  // props: {
-  //   currentQuestion: Object,
-  //   next: Function,
-  //   increment: Function,
-  // },
   data: function () {
     return {
       selectedIndex: null,
@@ -91,6 +86,7 @@ export default {
         this.currentQuestion.correct_answer,
       ];
       this.shuffleAnswers = _.shuffle(answers);
+      this.shuffledAnswers = [...this.shuffleAnswers];
       this.correctIndex = this.shuffledAnswers.indexOf(
         this.currentQuestion.correct_answer
       );

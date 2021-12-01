@@ -7,7 +7,7 @@
         <b-col sm="6" offset="3">
           <QuestionBox
             v-if="questions.length"
-            :currentQuestion="questions[index]"
+            :currentQuestion="questions[pageIndex]"
             :next="next"
             :increment="increment"
           />
@@ -30,17 +30,16 @@ export default {
   data() {
     return {
       questions: [],
-      index: 0,
+      pageIndex: 0,
       numCorrect: 0,
       numTotal: 0,
     };
   },
   methods: {
     next() {
-      this.index++;
+      this.pageIndex++;
     },
     increment(isCorrect) {
-      console.log(isCorrect);
       if (isCorrect) {
         this.numCorrect++;
       }
@@ -56,6 +55,7 @@ export default {
       })
       .then((jsonData) => {
         this.questions = jsonData.results;
+        this.numTotal = this.questions.length;
       });
   },
 };

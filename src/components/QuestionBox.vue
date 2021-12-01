@@ -1,5 +1,6 @@
 <template>
   <div>
+
     <b-jumbotron
       header="BootstrapVue"
       lead="Bootstrap v4 Components for Vue.js 2"
@@ -23,7 +24,7 @@
 
       <b-button
         variant="primary"
-        :click="submitAnswer"
+        @click="submitAnswer"
         :disabled="selectedIndex === null || answered"
       >
         Submit
@@ -75,7 +76,7 @@ export default {
       console.log(index);
     },
     submitAnswer() {
-      let isCorrect = true;
+      let isCorrect = false;
 
       if (this.selectedIndex === this.correctIndex) {
         isCorrect = true;
